@@ -13,7 +13,7 @@ Ground.prototype.calculateCost = function(price) {
 // Create descendant class
 //
 var LandOwnership = function(area) {
-	this.area = area;
+	this.constructor.apply(this, arguments);
 	this.category = "land";
 	this.type = "ownership";
 };

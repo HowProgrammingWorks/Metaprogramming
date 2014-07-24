@@ -15,7 +15,7 @@ Ground.prototype.calculateCost = function(price) {
 function inheritGround(mixin) {
 
 	var iGround = function(area) {
-		this.area = area;
+		this.constructor.apply(this, arguments);
 		for (var property in mixin) this[property] = mixin[property];
 	};
 
