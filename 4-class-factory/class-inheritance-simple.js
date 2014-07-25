@@ -14,16 +14,26 @@ Ground.prototype.calculateCost = function(price) {
 //
 var LandOwnership = function(area) {
 	this.constructor.apply(this, arguments);
-	this.category = "land";
-	this.type = "ownership";
+	this.isEmpty = !(parseInt(area) > 0);
 };
 
 // Use protorype inheritance from Ground
 //
 LandOwnership.prototype = Object.create(Ground.prototype);
 
+// Add properties to class prototype
+//
+LandOwnership.prototype.category = "land";
+LandOwnership.prototype.type = "ownership";
+
+// Add method to descendant class prototype
+//
+LandOwnership.prototype.toString = function(price) {
+	return this.category+' '+this.type+' / '+this.area;
+}
+
 // Create and use instance
 //
 var land = new LandOwnership(50);
 console.dir(land);
-console.log('Cost is: '+land.calculateCost(7));
+console.log('Cost is: '+land.calculateCost(7)+' for '+land.toString());

@@ -14,22 +14,34 @@ Ground.prototype.calculateCost = function(price) {
 //
 function inheritGround(mixin) {
 
-	var iGround = function(area) {
+	var DescendantGround = function(area) {
 		this.constructor.apply(this, arguments);
-		for (var property in mixin) this[property] = mixin[property];
+		this.isEmpty = !(parseInt(area) > 0);
 	};
 
-	iGround.prototype = Object.create(Ground.prototype);
-	return iGround;
+	DescendantGround.prototype = Object.create(Ground.prototype);
+
+	// Mixin properties to class prototype
+	//
+	for (var property in mixin) DescendantGround.prototype[property] = mixin[property];
+
+	return DescendantGround;
 
 }
 
 // Create descendant class dynamically
 //
-var LandOwnership = inheritGround({ category:"land", type:"ownership" });
+var LandOwnership = inheritGround({
+	category:"land",
+	type:"ownership",
+	// Add method to descendant class prototype
+	toString: function(price) {
+		return this.category+' '+this.type+' / '+this.area;
+	}
+});
 
 // Create and use instance
 //
 var land = new LandOwnership(50);
 console.dir(land);
-console.log('Cost is: '+land.calculateCost(7));
+console.log('Cost is: '+land.calculateCost(7)+' for '+land.toString());
