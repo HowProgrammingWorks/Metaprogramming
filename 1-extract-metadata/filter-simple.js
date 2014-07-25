@@ -27,9 +27,9 @@ function filter(names) {
 			name.indexOf("V") === 0 &&
 			name.slice(-2) == "ov" &&
 			!(
-				name.length>=50 && name.length<=65 &&
-				name.indexOf("Abu") > -1 &&
-				name.indexOf("Lev") === 0 &&
+				name.length>=50 && name.length<=65 ||
+				name.indexOf("Abu") > -1 ||
+				name.indexOf("Lev") === 0 ||
 				name.slice(-3) == "iov"
 			)
 		) result.push(name);
