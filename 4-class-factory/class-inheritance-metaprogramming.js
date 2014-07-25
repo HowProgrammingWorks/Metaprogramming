@@ -21,7 +21,7 @@ function inheritGround(mixin) {
 
 	DescendantGround.prototype = Object.create(Ground.prototype);
 
-	// Mixin properties to class prototype
+	// Mixin properties to descendant class prototype
 	//
 	for (var property in mixin) DescendantGround.prototype[property] = mixin[property];
 

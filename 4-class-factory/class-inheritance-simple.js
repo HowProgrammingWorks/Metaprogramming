@@ -21,7 +21,7 @@ var LandOwnership = function(area) {
 //
 LandOwnership.prototype = Object.create(Ground.prototype);
 
-// Add properties to class prototype
+// Add properties to descendant class prototype
 //
 LandOwnership.prototype.category = "land";
 LandOwnership.prototype.type = "ownership";
