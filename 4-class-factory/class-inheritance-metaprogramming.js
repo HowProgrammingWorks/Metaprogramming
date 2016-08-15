@@ -1,20 +1,20 @@
-﻿// Base class
+'use strict';
+
+// Base class
 //
-var Ground = function(area) {
+let Ground = (area) => {
   this.area = area;
 };
 
 // Base class prototype method
 //
-Ground.prototype.calculateCost = function(price) {
-  return this.area * price;
-};
+Ground.prototype.calculateCost = (price) => this.area * price;
 
 // MetaFactory to build descendant classes
 //
 function inheritGround(mixin) {
 
-  var DescendantGround = function(area) {
+  let DescendantGround = (area) => {
     this.constructor.apply(this, arguments);
     this.isEmpty = parseInt(area) <= 0;
   };
@@ -23,7 +23,9 @@ function inheritGround(mixin) {
 
   // Mixin properties to descendant class prototype
   //
-  for (var property in mixin) DescendantGround.prototype[property] = mixin[property];
+  for (let property in mixin) {
+    DescendantGround.prototype[property] = mixin[property];
+  }
 
   return DescendantGround;
 
@@ -31,17 +33,15 @@ function inheritGround(mixin) {
 
 // Create descendant class dynamically
 //
-var LandOwnership = inheritGround({
-  category:"land",
-  type:"ownership",
+let LandOwnership = inheritGround({
+  category: 'land',
+  type: 'ownership',
   // Add method to descendant class prototype
-  toString: function(price) {
-    return this.category+' '+this.type+' / '+this.area;
-  }
+  toString: (price) => this.category + ' ' + this.type + ' / ' +this.area
 });
 
 // Create and use instance
 //
-var land = new LandOwnership(50);
+let land = new LandOwnership(50);
 console.dir(land);
-console.log('Cost is: '+land.calculateCost(7)+' for '+land.toString());
+console.log('Cost is: ' + land.calculateCost(7) + ' for ' + land.toString());

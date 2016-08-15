@@ -1,4 +1,4 @@
-﻿(function(wcl) {
+(function(wcl) {
 
   wcl.AjaxAPI = function(methods) { // params: { method: { get/post:url }, ... }
     var api = {};
@@ -98,7 +98,7 @@
     };
     return ds;
   };
-  
+
   wcl.parse = function(json) {
     var result;
     eval('result = new Object(' + json + ')');

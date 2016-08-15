@@ -1,6 +1,8 @@
-﻿// Data
+'use strict';
+
+// Data
 //
-var names = [
+let names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
   'Victor Michailovich Glushkov',
@@ -17,13 +19,13 @@ var names = [
 
 // Metadata
 //
-var conditions = {
-  length: [ 10, 200 ],
+let conditions = {
+  length: [10, 200],
   contains: 'Mich',
   starts: 'V',
   ends: 'ov',
   not: {
-    length: [ 50, 65 ],
+    length: [50, 65],
     contains: 'Abu',
     starts: 'Lev',
     ends: 'iov'
@@ -33,19 +35,19 @@ var conditions = {
 // Metamodel
 //
 function filter(names, conditions) {
-  var operations = {
-    length:   function(s,v) { return s.length >= v[0] && s.length <= v[1] },
-    contains: function(s,v) { return s.indexOf(v) > -1 },
-    starts:   function(s,v) { return s.indexOf(v) === 0 },
-    ends:     function(s,v) { return s.slice(-v.length) === v },
-    not:      function(s,v) { return !check(s,v) }
+  let operations = {
+    length:   (s,v) => s.length >= v[0] && s.length <= v[1],
+    contains: (s,v) => s.indexOf(v) > -1,
+    starts:   (s,v) => s.indexOf(v) === 0,
+    ends:     (s,v) => s.slice(-v.length) === v,
+    not:      (s,v) => !check(s,v)
   };
   function check(s, conditions) {
-    var valid = true;
-    for (var key in conditions) valid &= operations[key](s, conditions[key]);
+    let valid = true;
+    for (let key in conditions) valid &= operations[key](s, conditions[key]);
     return valid;
   }
-  return names.filter(function(s) { return check(s, conditions); });
+  return names.filter((s) => check(s, conditions));
 }
 
 // Execution

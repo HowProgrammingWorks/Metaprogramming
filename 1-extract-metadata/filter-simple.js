@@ -1,6 +1,8 @@
-﻿// Data
+'use strict';
+
+// Data
 //
-var names = [
+let names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
   'Victor Michailovich Glushkov',
@@ -18,8 +20,8 @@ var names = [
 // Logic
 //
 function filter(names) {
-  var result = [], name;
-  for (var i=0; i<names.length; i++) {
+  let result = [], name;
+  for (let i = 0; i < names.length; i++) {
     name = names[i];
     if (
       name.length >= 10 && name.length <= 200 &&
