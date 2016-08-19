@@ -36,18 +36,18 @@ let conditions = {
 //
 function filter(names, conditions) {
   let operations = {
-    length:   (s,v) => s.length >= v[0] && s.length <= v[1],
-    contains: (s,v) => s.indexOf(v) > -1,
-    starts:   (s,v) => s.indexOf(v) === 0,
-    ends:     (s,v) => s.slice(-v.length) === v,
-    not:      (s,v) => !check(s,v)
+    length:   (s, v) => s.length >= v[0] && s.length <= v[1],
+    contains: (s, v) => s.indexOf(v) > -1,
+    starts:   (s, v) => s.indexOf(v) === 0,
+    ends:     (s, v) => s.slice(-v.length) === v,
+    not:      (s, v) => !check(s,v)
   };
   function check(s, conditions) {
     let valid = true;
     for (let key in conditions) valid &= operations[key](s, conditions[key]);
     return valid;
   }
-  return names.filter((s) => check(s, conditions));
+  return names.filter(s => check(s, conditions));
 }
 
 // Execution

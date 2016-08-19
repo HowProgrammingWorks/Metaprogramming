@@ -1,7 +1,8 @@
 'use strict';
 
-let fs = require('fs'),
-    request = require('request');
+global.api = {};
+api.fs = require('fs'),
+api.request = require('request');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
@@ -41,13 +42,13 @@ function iterate(tasks) {
   // Metamodel configuration metadata
   //
   let sources = {
-    get:  request.get,
-    load: fs.createReadStream
+    get:  api.request.get,
+    load: api.fs.createReadStream
   };
   let destinations = {
-    save: fs.createWriteStream,
-    post: request.post,
-    put:  request.put
+    save: api.fs.createWriteStream,
+    post: api.request.post,
+    put:  api.request.put
   };
 
   // Metamodel logic
