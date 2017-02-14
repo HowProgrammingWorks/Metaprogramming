@@ -9,7 +9,7 @@ api.request = require('request');
 //
 function duration(s) {
   if (typeof(s) === 'number') return s;
-  let units = {
+  const units = {
     days:    { rx: /(\d+)\s*d/, mul: 86400 },
     hours:   { rx: /(\d+)\s*h/, mul: 3600 },
     minutes: { rx: /(\d+)\s*m/, mul: 60 },
@@ -26,7 +26,7 @@ function duration(s) {
 
 // Metadata
 //
-let tasks = [
+const tasks = [
   { interval: 5000, get: 'http://127.0.0.1/api/method1.json', save: 'file1.json' },
   { interval: '8s', get: 'http://127.0.0.1/api/method2.json', put: 'http://127.0.0.1/api/method4.json', save: 'file2.json' },
   { interval: '7s', get: 'http://127.0.0.1/api/method3.json', post: 'http://127.0.0.1/api/method5.json' },
@@ -41,11 +41,11 @@ function iterate(tasks) {
 
   // Metamodel configuration metadata
   //
-  let sources = {
+  const sources = {
     get:  api.request.get,
     load: api.fs.createReadStream
   };
-  let destinations = {
+  const destinations = {
     save: api.fs.createWriteStream,
     post: api.request.post,
     put:  api.request.put
@@ -56,9 +56,13 @@ function iterate(tasks) {
   function closureTask(task) {
     return () => {
       console.dir(task);
-      let key, verb, source, destination;
-      for (key in sources) if (task[key]) source = sources[key](task[key]);
-      for (key in destinations) if (task[key]) source.pipe(destinations[key](task[key]));
+      let key, source;
+      for (key in sources) {
+        if (task[key]) source = sources[key](task[key]);
+      }
+      for (key in destinations) {
+        if (task[key]) source.pipe(destinations[key](task[key]));
+      }
     };
   }
   for (let i = 0; i < tasks.length; i++) {

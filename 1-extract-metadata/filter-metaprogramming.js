@@ -2,7 +2,7 @@
 
 // Data
 //
-let names = [
+const names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
   'Victor Michailovich Glushkov',
@@ -19,7 +19,7 @@ let names = [
 
 // Metadata
 //
-let conditions = {
+const conditions = {
   length: [10, 200],
   contains: 'Mich',
   starts: 'V',
@@ -35,12 +35,12 @@ let conditions = {
 // Metamodel
 //
 function filter(names, conditions) {
-  let operations = {
+  const operations = {
     length:   (s, v) => s.length >= v[0] && s.length <= v[1],
     contains: (s, v) => s.indexOf(v) > -1,
     starts:   (s, v) => s.indexOf(v) === 0,
     ends:     (s, v) => s.slice(-v.length) === v,
-    not:      (s, v) => !check(s,v)
+    not:      (s, v) => !check(s, v)
   };
   function check(s, conditions) {
     let valid = true;

@@ -16,7 +16,7 @@ Ground.prototype.calculateCost = function(price) {
 //
 function inheritGround(mixin) {
 
-  let DescendantGround = function(area) {
+  const DescendantGround = function(area) {
     this.constructor.apply(this, arguments);
     this.isEmpty = parseInt(area) <= 0;
   };
@@ -34,7 +34,7 @@ function inheritGround(mixin) {
 
 // Create descendant class dynamically
 //
-let LandOwnership = inheritGround({
+const LandOwnership = inheritGround({
   category: 'land',
   type: 'ownership',
   // Add method to descendant class prototype
@@ -45,6 +45,6 @@ let LandOwnership = inheritGround({
 
 // Create and use instance
 //
-let land = new LandOwnership(50);
+const land = new LandOwnership(50);
 console.dir(land);
 console.log('Cost is: ' + land.calculateCost(7) + ' for ' + land.toString());

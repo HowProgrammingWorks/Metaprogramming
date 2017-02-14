@@ -36,6 +36,6 @@ LandOwnership.prototype.toString = function(price) {
 
 // Create and use instance
 //
-let land = new LandOwnership(50);
+const land = new LandOwnership(50);
 console.dir(land);
 console.log('Cost is: ' + land.calculateCost(7) + ' for ' + land.toString());

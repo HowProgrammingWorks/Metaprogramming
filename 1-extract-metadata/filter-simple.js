@@ -2,7 +2,7 @@
 
 // Data
 //
-let names = [
+const names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
   'Victor Michailovich Glushkov',
@@ -20,7 +20,8 @@ let names = [
 // Logic
 //
 function filter(names) {
-  let result = [], name;
+  const result = [];
+  let name;
   for (let i = 0; i < names.length; i++) {
     name = names[i];
     if (
