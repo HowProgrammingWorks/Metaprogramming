@@ -38,8 +38,8 @@ const LandOwnership = inheritGround({
   category: 'land',
   type: 'ownership',
   // Add method to descendant class prototype
-  toString: function(price) {
-    return this.category + ' ' + this.type + ' / ' +this.area;
+  toString: function() {
+    return this.category + ' ' + this.type + ' / ' + this.area;
   }
 });
 

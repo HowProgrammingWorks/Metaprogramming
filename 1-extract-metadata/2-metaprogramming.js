@@ -44,7 +44,9 @@ function filter(names, conditions) {
   };
   function check(s, conditions) {
     let valid = true;
-    for (let key in conditions) valid &= operations[key](s, conditions[key]);
+    for (let key in conditions) {
+      valid &= operations[key](s, conditions[key]);
+    }
     return valid;
   }
   return names.filter(s => check(s, conditions));

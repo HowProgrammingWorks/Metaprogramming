@@ -9,7 +9,7 @@ function Ground(area) {
 // Base class prototype method
 //
 Ground.prototype.calculateCost = function(price) {
-  return this.area * price
+  return this.area * price;
 };
 
 // Create descendant class
@@ -30,7 +30,7 @@ LandOwnership.prototype.type = 'ownership';
 
 // Add method to descendant class prototype
 //
-LandOwnership.prototype.toString = function(price) {
+LandOwnership.prototype.toString = function() {
   return this.category + ' ' + this.type + ' / ' + this.area;
 };
 
