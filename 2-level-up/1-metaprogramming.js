@@ -1,8 +1,7 @@
 'use strict';
 
-global.api = {};
-api.fs = require('fs'),
-api.request = require('request');
+const fs = require('fs');
+const request = require('request');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
@@ -55,11 +54,11 @@ function iterate(tasks) {
     return () => {
       console.dir(task);
       let source;
-      if (task.get)  source = api.request.get(task.get);
-      if (task.load) source = api.fs.createReadStream(task.load);
-      if (task.save) source.pipe(api.fs.createWriteStream(task.save));
-      if (task.post) source.pipe(api.request.post(task.post));
-      if (task.put)  source.pipe(api.request.put(task.put));
+      if (task.get)  source = request.get(task.get);
+      if (task.load) source = fs.createReadStream(task.load);
+      if (task.save) source.pipe(fs.createWriteStream(task.save));
+      if (task.post) source.pipe(request.post(task.post));
+      if (task.put)  source.pipe(request.put(task.put));
     };
   }
   for (let i = 0; i < tasks.length; i++) {

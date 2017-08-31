@@ -1,8 +1,7 @@
 'use strict';
 
-global.api = {};
-api.fs = require('fs'),
-api.request = require('request');
+const fs = require('fs');
+const request = require('request');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
@@ -16,10 +15,12 @@ function duration(s) {
     seconds: { rx: /(\d+)\s*s/, mul: 1 }
   };
   let result = 0, unit, match;
-  if (typeof(s) === 'string') for (let key in units) {
-    unit = units[key];
-    match = s.match(unit.rx);
-    if (match) result += parseInt(match[1]) * unit.mul;
+  if (typeof(s) === 'string') {
+    for (const key in units) {
+      unit = units[key];
+      match = s.match(unit.rx);
+      if (match) result += parseInt(match[1]) * unit.mul;
+    }
   }
   return result * 1000;
 }
@@ -56,13 +57,13 @@ function iterate(tasks) {
   // Metamodel configuration metadata
   //
   const sources = {
-    get:  api.request.get,
-    load: api.fs.createReadStream
+    get:  request.get,
+    load: fs.createReadStream
   };
   const destinations = {
-    save: api.fs.createWriteStream,
-    post: api.request.post,
-    put:  api.request.put
+    save: fs.createWriteStream,
+    post: request.post,
+    put:  request.put
   };
 
   // Metamodel logic
