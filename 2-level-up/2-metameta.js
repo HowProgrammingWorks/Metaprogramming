@@ -5,8 +5,7 @@ const request = require('request');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
-//
-function duration(s) {
+const duration = (s) => {
   if (typeof(s) === 'number') return s;
   const units = {
     days:    { rx: /(\d+)\s*d/, mul: 86400 },
@@ -23,7 +22,7 @@ function duration(s) {
     }
   }
   return result * 1000;
-}
+};
 
 // Metadata
 //
@@ -50,12 +49,10 @@ const tasks = [
     save: 'file3.json' },
 ];
 
-// Metamodel
-//
-function iterate(tasks) {
+// Metaprogram
+const iterate = (tasks) => {
 
-  // Metamodel configuration metadata
-  //
+  // Configuration metadata
   const sources = {
     get:  request.get,
     load: fs.createReadStream
@@ -66,25 +63,22 @@ function iterate(tasks) {
     put:  request.put
   };
 
-  // Metamodel logic
-  //
-  function closureTask(task) {
-    return () => {
-      console.dir(task);
-      let key, source;
-      for (key in sources) {
-        if (task[key]) source = sources[key](task[key]);
-      }
-      for (key in destinations) {
-        if (task[key]) source.pipe(destinations[key](task[key]));
-      }
-    };
-  }
+  // Abcstract logic
+  const closureTask = (task) => () => {
+    console.dir(task);
+    let key, source;
+    for (key in sources) {
+      if (task[key]) source = sources[key](task[key]);
+    }
+    for (key in destinations) {
+      if (task[key]) source.pipe(destinations[key](task[key]));
+    }
+  };
+
   for (let i = 0; i < tasks.length; i++) {
     setInterval(closureTask(tasks[i]), duration(tasks[i].interval));
   }
-}
+};
 
-// Execution
-//
+// Usage
 iterate(tasks);

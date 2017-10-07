@@ -1,7 +1,6 @@
 'use strict';
 
-// Data
-//
+// Dataset
 const names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
@@ -17,13 +16,11 @@ const names = [
   'Benedito de Espinosa'
 ];
 
-// Logic
-//
-function filter(names) {
+// Filter mixed with conditions
+const filter = (names) => {
   const result = [];
-  let name;
   for (let i = 0; i < names.length; i++) {
-    name = names[i];
+    const name = names[i];
     if (
       name.length >= 10 && name.length <= 200 &&
       name.indexOf('Mich') > -1 &&
@@ -38,8 +35,7 @@ function filter(names) {
     ) result.push(name);
   }
   return result;
-}
+};
 
-// Execution
-//
+// Usage
 console.dir(filter(names));

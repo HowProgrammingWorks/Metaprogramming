@@ -1,7 +1,6 @@
 'use strict';
 
-// Data
-//
+// Dataset
 const names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
@@ -18,7 +17,6 @@ const names = [
 ];
 
 // Metadata
-//
 const conditions = {
   length: [10, 200],
   contains: 'Mich',
@@ -32,14 +30,13 @@ const conditions = {
   }
 };
 
-// Metamodel
-//
-function filter(names, conditions) {
+// Metaprogramming
+const filter = (names, conditions) => {
   const operations = {
     length:   (s, v) => s.length >= v[0] && s.length <= v[1],
-    contains: (s, v) => s.indexOf(v) > -1,
-    starts:   (s, v) => s.indexOf(v) === 0,
-    ends:     (s, v) => s.slice(-v.length) === v,
+    contains: (s, v) => s.includes(v),
+    starts:   (s, v) => s.startsWith(v),
+    ends:     (s, v) => s.endsWith(v),
     not:      (s, v) => !check(s, v)
   };
   function check(s, conditions) {
@@ -50,8 +47,7 @@ function filter(names, conditions) {
     return valid;
   }
   return names.filter(s => check(s, conditions));
-}
+};
 
-// Execution
-//
+// Usage
 console.dir(filter(names, conditions));

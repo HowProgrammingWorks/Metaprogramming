@@ -5,8 +5,8 @@ const request = require('request');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
-//
-function duration(s) {
+const duration = (s) => {
+  if (typeof(s) === 'number') return s;
   let result = 0;
   if (typeof(s) === 'string') {
     const days    = s.match(/(\d+)\s*d/);
@@ -17,13 +17,11 @@ function duration(s) {
     if (hours)   result += parseInt(hours[1]) * 3600;
     if (minutes) result += parseInt(minutes[1]) * 60;
     if (seconds) result += parseInt(seconds[1]);
-    result *= 1000;
-  } else if (typeof(s) === 'number') result = s;
-  return result;
-}
+    return result * 1000;
+  }
+};
 
 // Metadata
-//
 const tasks = [
   { interval: 5000,
     get: 'http://127.0.0.1/api/method1.json',
@@ -47,25 +45,21 @@ const tasks = [
     save: 'file3.json' }
 ];
 
-// Metamodel
-//
-function iterate(tasks) {
-  function closureTask(task) {
-    return () => {
-      console.dir(task);
-      let source;
-      if (task.get)  source = request.get(task.get);
-      if (task.load) source = fs.createReadStream(task.load);
-      if (task.save) source.pipe(fs.createWriteStream(task.save));
-      if (task.post) source.pipe(request.post(task.post));
-      if (task.put)  source.pipe(request.put(task.put));
-    };
-  }
+// Metaprogram
+const iterate = (tasks) => {
+  const closureTask = (task) => () => {
+    console.dir(task);
+    let source;
+    if (task.get)  source = request.get(task.get);
+    if (task.load) source = fs.createReadStream(task.load);
+    if (task.save) source.pipe(fs.createWriteStream(task.save));
+    if (task.post) source.pipe(request.post(task.post));
+    if (task.put)  source.pipe(request.put(task.put));
+  };
   for (let i = 0; i < tasks.length; i++) {
     setInterval(closureTask(tasks[i]), duration(tasks[i].interval));
   }
-}
+};
 
-// Execution
-//
+// Usage
 iterate(tasks);
