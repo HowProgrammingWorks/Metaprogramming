@@ -3,29 +3,37 @@
 const fs = require('fs');
 const request = require('request');
 
-// Parse duration to seconds
-// Example: duration('1d 10h 7m 13s')
-const duration = (s) => {
+// Utilities
+
+const DURATION_UNITS = {
+  d: 86400, // days
+  h:  3600, // hours
+  m:    60, // minutes
+  s:     1, // seconds
+};
+
+const duration = (
+  // Parse duration to seconds
+  s // string, duration syntax
+  // Returns: number, milliseconds
+  // Example: duration('1d 10h 7m 13s')
+) => {
   if (typeof(s) === 'number') return s;
-  const units = {
-    days:    { rx: /(\d+)\s*d/, mul: 86400 },
-    hours:   { rx: /(\d+)\s*h/, mul: 3600 },
-    minutes: { rx: /(\d+)\s*m/, mul: 60 },
-    seconds: { rx: /(\d+)\s*s/, mul: 1 }
-  };
-  let result = 0, unit, match;
-  if (typeof(s) === 'string') {
-    for (const key in units) {
-      unit = units[key];
-      match = s.match(unit.rx);
-      if (match) result += parseInt(match[1]) * unit.mul;
-    }
+  if (typeof(s) !== 'string') return 0;
+  let result = 0;
+  const parts = s.split(' ');
+  let unit, value, part, mult;
+  for (part of parts) {
+    unit = part.slice(-1);
+    value = parseInt(part.slice(0, -1));
+    mult = DURATION_UNITS[unit];
+    if (!isNaN(value)) result += value * mult;
   }
   return result * 1000;
 };
 
 // Metadata
-//
+
 const tasks = [
   { interval: 5000,
     get: 'http://127.0.0.1/api/method1.json',
@@ -49,7 +57,8 @@ const tasks = [
     save: 'file3.json' },
 ];
 
-// Metaprogram
+// Metaprogramming
+
 const iterate = (tasks) => {
 
   // Configuration metadata
@@ -81,4 +90,5 @@ const iterate = (tasks) => {
 };
 
 // Usage
+
 iterate(tasks);

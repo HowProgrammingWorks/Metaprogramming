@@ -22,6 +22,7 @@ const duration = (s) => {
 };
 
 // Metadata
+
 const tasks = [
   { interval: 5000,
     get: 'http://127.0.0.1/api/method1.json',
@@ -46,6 +47,7 @@ const tasks = [
 ];
 
 // Metaprogram
+
 const iterate = (tasks) => {
   const closureTask = (task) => () => {
     console.dir(task);
@@ -62,4 +64,5 @@ const iterate = (tasks) => {
 };
 
 // Usage
+
 iterate(tasks);
