@@ -1,6 +1,7 @@
 'use strict';
 
 // Dataset
+
 const names = [
   'Marcus Aurelius Antoninus Augustus',
   'Darth Vader',
@@ -17,6 +18,7 @@ const names = [
 ];
 
 // Metadata
+
 const conditions = {
   length: [10, 200],
   contains: 'Mich',
@@ -31,6 +33,7 @@ const conditions = {
 };
 
 // Metaprogramming
+
 const filter = (names, conditions) => {
   const operations = {
     length:   (s, v) => s.length >= v[0] && s.length <= v[1],
@@ -39,15 +42,16 @@ const filter = (names, conditions) => {
     ends:     (s, v) => s.endsWith(v),
     not:      (s, v) => !check(s, v)
   };
-  function check(s, conditions) {
+  const check = (s, conditions) => {
     let valid = true;
     for (const key in conditions) {
       valid &= operations[key](s, conditions[key]);
     }
     return valid;
-  }
+  };
   return names.filter(s => check(s, conditions));
 };
 
 // Usage
+
 console.dir(filter(names, conditions));
