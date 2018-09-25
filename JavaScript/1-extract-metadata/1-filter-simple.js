@@ -19,7 +19,7 @@ const names = [
 
 // Filter mixed with conditions
 
-const filter = (names) => {
+const filter = names => {
   const result = [];
   let i, name;
   for (i = 0; i < names.length; i++) {

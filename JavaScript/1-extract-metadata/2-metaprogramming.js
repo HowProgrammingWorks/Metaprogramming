@@ -35,13 +35,7 @@ const conditions = {
 // Metaprogramming
 
 const filter = (names, conditions) => {
-  const operations = {
-    length:   (s, v) => s.length >= v[0] && s.length <= v[1],
-    contains: (s, v) => s.includes(v),
-    starts:   (s, v) => s.startsWith(v),
-    ends:     (s, v) => s.endsWith(v),
-    not:      (s, v) => !check(s, v)
-  };
+  const operations = {};
   const check = (s, conditions) => {
     let valid = true;
     for (const key in conditions) {
@@ -49,6 +43,13 @@ const filter = (names, conditions) => {
     }
     return valid;
   };
+  Object.assign(operations, {
+    length:   (s, v) => s.length >= v[0] && s.length <= v[1],
+    contains: (s, v) => s.includes(v),
+    starts:   (s, v) => s.startsWith(v),
+    ends:     (s, v) => s.endsWith(v),
+    not:      (s, v) => !check(s, v)
+  });
   return names.filter(s => check(s, conditions));
 };
 

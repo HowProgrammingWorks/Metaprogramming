@@ -12,7 +12,7 @@ Ground.prototype.calculateCost = function(price) {
 
 // MetaFactory to build descendant classes
 
-const inheritGround = (mixin) => {
+const inheritGround = mixin => {
 
   const DescendantGround = function(area) {
     this.constructor(area);

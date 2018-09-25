@@ -1,11 +1,12 @@
 'use strict';
 
 const fs = require('fs');
-const request = require('request');
+const http = require('http');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
-const duration = (s) => {
+
+const duration = s => {
   if (typeof(s) === 'number') return s;
   let result = 0;
   if (typeof(s) === 'string') {
@@ -48,15 +49,15 @@ const tasks = [
 
 // Metaprogram
 
-const iterate = (tasks) => {
-  const closureTask = (task) => () => {
+const iterate = tasks => {
+  const closureTask = task => () => {
     console.dir(task);
     let source;
-    if (task.get)  source = request.get(task.get);
+    if (task.get)  source = http.get(task.get);
     if (task.load) source = fs.createReadStream(task.load);
     if (task.save) source.pipe(fs.createWriteStream(task.save));
-    if (task.post) source.pipe(request.post(task.post));
-    if (task.put)  source.pipe(request.put(task.put));
+    if (task.post) source.pipe(http.post(task.post));
+    if (task.put)  source.pipe(http.put(task.put));
   };
   for (let i = 0; i < tasks.length; i++) {
     setInterval(closureTask(tasks[i]), duration(tasks[i].interval));
