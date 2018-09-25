@@ -21,11 +21,10 @@ const duration = s => {
   if (typeof(s) !== 'string') return 0;
   let result = 0;
   const parts = s.split(' ');
-  let unit, value, part, mult;
-  for (part of parts) {
-    unit = part.slice(-1);
-    value = parseInt(part.slice(0, -1));
-    mult = DURATION_UNITS[unit];
+  for (const part of parts) {
+    const unit = part.slice(-1);
+    const value = parseInt(part.slice(0, -1));
+    const mult = DURATION_UNITS[unit];
     if (!isNaN(value)) result += value * mult;
   }
   return result * 1000;
@@ -74,11 +73,11 @@ const iterate = tasks => {
   // Abcstract logic
   const closureTask = task => () => {
     console.dir(task);
-    let key, source;
-    for (key in sources) {
+    let source;
+    for (const key in sources) {
       if (task[key]) source = sources[key](task[key]);
     }
-    for (key in destinations) {
+    for (const key in destinations) {
       if (task[key]) source.pipe(destinations[key](task[key]));
     }
   };

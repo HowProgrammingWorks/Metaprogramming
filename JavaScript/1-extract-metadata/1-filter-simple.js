@@ -21,9 +21,8 @@ const names = [
 
 const filter = names => {
   const result = [];
-  let i, name;
-  for (i = 0; i < names.length; i++) {
-    name = names[i];
+  for (let i = 0; i < names.length; i++) {
+    const name = names[i];
     if (
       name.length >= 10 && name.length <= 200 &&
       name.indexOf('Mich') > -1 &&
