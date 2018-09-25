@@ -17,8 +17,8 @@ const DURATION_UNITS = {
 // Returns: number, milliseconds
 // Example: duration('1d 10h 7m 13s')
 const duration = s => {
-  if (typeof(s) === 'number') return s;
-  if (typeof(s) !== 'string') return 0;
+  if (typeof s === 'number') return s;
+  if (typeof s !== 'string') return 0;
   let result = 0;
   const parts = s.split(' ');
   for (const part of parts) {

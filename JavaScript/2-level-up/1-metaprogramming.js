@@ -7,9 +7,9 @@ const http = require('http');
 // Example: duration('1d 10h 7m 13s')
 
 const duration = s => {
-  if (typeof(s) === 'number') return s;
+  if (typeof s === 'number') return s;
   let result = 0;
-  if (typeof(s) === 'string') {
+  if (typeof s === 'string') {
     const days    = s.match(/(\d+)\s*d/);
     const hours   = s.match(/(\d+)\s*h/);
     const minutes = s.match(/(\d+)\s*m/);
