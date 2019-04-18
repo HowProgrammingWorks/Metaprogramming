@@ -14,7 +14,7 @@ const names = [
   'Muammar Muhammad Abu Minyar al-Gaddafi',
   'Rene Descartes',
   'Fyodor Mikhailovich Dostoyevsky',
-  'Benedito de Espinosa'
+  'Benedito de Espinosa',
 ];
 
 // Metadata
@@ -44,15 +44,17 @@ const filter = (names, conditions) => {
     return valid;
   };
   Object.assign(operations, {
-    length:   (s, v) => s.length >= v[0] && s.length <= v[1],
+    length: (s, v) => s.length >= v[0] && s.length <= v[1],
     contains: (s, v) => s.includes(v),
-    starts:   (s, v) => s.startsWith(v),
-    ends:     (s, v) => s.endsWith(v),
-    not:      (s, v) => !check(s, v)
+    starts: (s, v) => s.startsWith(v),
+    ends: (s, v) => s.endsWith(v),
+    not: (s, v) => !check(s, v),
   });
   return names.filter(s => check(s, conditions));
 };
 
 // Usage
 
-console.dir(filter(names, conditions));
+const result = filter(names, conditions);
+console.dir({ names });
+console.dir({ result });

@@ -14,7 +14,7 @@ const names = [
   'Muammar Muhammad Abu Minyar al-Gaddafi',
   'Rene Descartes',
   'Fyodor Mikhailovich Dostoyevsky',
-  'Benedito de Espinosa'
+  'Benedito de Espinosa',
 ];
 
 // Filter mixed with conditions
@@ -41,4 +41,6 @@ const filter = names => {
 
 // Usage
 
-console.dir(filter(names));
+const result = filter(names);
+console.dir({ names });
+console.dir({ result });
