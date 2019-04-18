@@ -39,7 +39,7 @@ const filter = (names, conditions) => {
   const check = (s, conditions) => {
     let valid = true;
     for (const key in conditions) {
-      valid &= operations[key](s, conditions[key]);
+      valid = valid && operations[key](s, conditions[key]);
     }
     return valid;
   };

@@ -25,14 +25,14 @@ const filter = names => {
     const name = names[i];
     if (
       name.length >= 10 && name.length <= 200 &&
-      name.indexOf('Mich') > -1 &&
-      name.indexOf('V') === 0 &&
-      name.slice(-2) === 'ov' &&
+      name.includes('Mich') &&
+      name.startsWith('V') &&
+      name.endsWith('ov') &&
       !(
         name.length >= 50 && name.length <= 65 &&
-        name.indexOf('Abu') > -1 &&
-        name.indexOf('Lev') === 0 &&
-        name.slice(-3) === 'iov'
+        name.includes('Abu') &&
+        name.startsWith('Lev') &&
+        name.endsWith('iov')
       )
     ) result.push(name);
   }
