@@ -50,7 +50,7 @@ const filter = (names, conditions) => {
     ends: (s, v) => s.endsWith(v),
     not: (s, v) => !check(s, v),
   });
-  return names.filter(s => check(s, conditions));
+  return names.filter((s) => check(s, conditions));
 };
 
 // Usage

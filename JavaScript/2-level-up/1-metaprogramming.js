@@ -5,7 +5,7 @@ const http = require('http');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
-const duration = s => {
+const duration = (s) => {
   if (typeof s === 'number') return s;
   let result = 0;
   if (typeof s === 'string') {
@@ -57,8 +57,8 @@ const tasks = [
 
 // Metaprogram
 
-const iterate = tasks => {
-  const closureTask = task => () => {
+const iterate = (tasks) => {
+  const closureTask = (task) => () => {
     console.dir(task);
     let source;
     if (task.get)  source = transport.get(task.get);
