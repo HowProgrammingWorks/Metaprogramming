@@ -2,13 +2,15 @@
 
 // Base class
 
-function Ground(area) {
-  this.area = area;
-}
+class Ground
+  constructor(area) {
+    this.area = area;
+  }
 
-Ground.prototype.calculateCost = function(price) {
-  return this.area * price;
-};
+  calculateCost(price) {
+    return this.area * price;
+  }
+}
 
 // MetaFactory to build descendant classes
 
@@ -34,7 +36,8 @@ const LandOwnership = inheritGround({
   type: 'ownership',
   // Add method to descendant class prototype
   toString() {
-    return this.category + ' ' + this.type + ' / ' + this.area;
+    const { category, type, area } = this;
+    return `${category} ${type} / ${area}`;
   }
 });
 
@@ -42,4 +45,5 @@ const LandOwnership = inheritGround({
 
 const land = new LandOwnership(50);
 console.dir(land);
-console.log('Cost is: ' + land.calculateCost(7) + ' for ' + land.toString());
+const cost = land.calculateCost(7);
+console.log(`Cost is: ${cost} for ${land.toString()}`);

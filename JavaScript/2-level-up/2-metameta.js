@@ -13,8 +13,8 @@ const DURATION_UNITS = {
 };
 
 // Parse duration to seconds
-//   s - string, duration syntax
-// Returns: number, milliseconds
+//   s <string> duration syntax
+// Returns: <number> milliseconds
 // Example: duration('1d 10h 7m 13s')
 const duration = s => {
   if (typeof s === 'number') return s;
@@ -61,13 +61,13 @@ const iterate = tasks => {
 
   // Configuration metadata
   const sources = {
-    get:  request.get,
+    get: request.get,
     load: fs.createReadStream
   };
   const destinations = {
     save: fs.createWriteStream,
     post: request.post,
-    put:  request.put
+    put: request.put
   };
 
   // Abcstract logic
@@ -82,8 +82,8 @@ const iterate = tasks => {
     }
   };
 
-  for (let i = 0; i < tasks.length; i++) {
-    setInterval(closureTask(tasks[i]), duration(tasks[i].interval));
+  for (const task of tasks) {
+    setInterval(closureTask(task), duration(task.interval));
   }
 };
 

@@ -15,5 +15,5 @@
       save: 'file3.json' },
   ],
   error: (err, request) => console.log('Error'),
-  success: (err, request) => counters.success++
+  success: (err, request) => counters.success++,
 }

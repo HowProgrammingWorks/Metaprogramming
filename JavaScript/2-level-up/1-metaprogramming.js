@@ -5,7 +5,6 @@ const http = require('http');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
-
 const duration = s => {
   if (typeof s === 'number') return s;
   let result = 0;
@@ -20,6 +19,15 @@ const duration = s => {
     if (seconds) result += parseInt(seconds[1]);
     return result * 1000;
   }
+};
+
+// Transports
+
+// TODO: stub to be implemented
+const transport = {
+  get: http.get,
+  post: () => {},
+  put: () => {},
 };
 
 // Metadata
@@ -53,14 +61,14 @@ const iterate = tasks => {
   const closureTask = task => () => {
     console.dir(task);
     let source;
-    if (task.get)  source = http.get(task.get);
+    if (task.get)  source = transport.get(task.get);
     if (task.load) source = fs.createReadStream(task.load);
     if (task.save) source.pipe(fs.createWriteStream(task.save));
-    if (task.post) source.pipe(http.post(task.post));
-    if (task.put)  source.pipe(http.put(task.put));
+    if (task.post) source.pipe(transport.post(task.post));
+    if (task.put)  source.pipe(transport.put(task.put));
   };
-  for (let i = 0; i < tasks.length; i++) {
-    setInterval(closureTask(tasks[i]), duration(tasks[i].interval));
+  for (const task of tasks) {
+    setInterval(closureTask(task), duration(task.interval));
   }
 };
 
