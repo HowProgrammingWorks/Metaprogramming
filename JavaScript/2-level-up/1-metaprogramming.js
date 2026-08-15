@@ -1,7 +1,7 @@
 'use strict';
 
-const fs = require('fs');
-const http = require('http');
+const fs = require('node:fs');
+const http = require('node:http');
 
 // Parse duration to seconds
 // Example: duration('1d 10h 7m 13s')
