@@ -2,7 +2,7 @@
 
 // Base class
 
-class Ground
+class Ground {
   constructor(area) {
     this.area = area;
   }
